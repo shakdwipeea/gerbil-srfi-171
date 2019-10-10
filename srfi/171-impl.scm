@@ -10,6 +10,13 @@
 ;; The software is provided "as is", without any express or implied warranties.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(define (compose . functions)
+  (define (make-chain thunk chain)
+    (lambda args
+      (call-with-values (lambda () (apply thunk args)) chain)))
+  (if (null? functions)
+      values
+      (fold-left make-chain (car functions) (cdr functions))))
 
 ;; A special value to be used as a placeholder where no value has been set and #f
 ;; doesn't cut it. Not exported, and not really needed.

@@ -15,10 +15,11 @@
   (import (scheme base)
           (scheme case-lambda)
           (scheme write)
-          (srfi 9)
+          (std srfi 9)
+	  (std srfi 125)
+	  (only (std srfi 1) reverse!)
           (only (scheme vector) vector->list)
-          (srfi 69)
-          (srfi 171 meta))
+          (srfi meta))
   (cond-expand
    (gauche (import (only (gauche base) compose reverse!)))
    (chibi (import (only (srfi 1) reverse!))))
@@ -61,5 +62,5 @@
                      (lambda args
                        (f (apply g args)))))))
    (else (begin)))
-
+  
   (include "171-impl.scm"))

@@ -10,8 +10,10 @@
 ;; The software is provided "as is", without any express or implied warranties.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-library (srfi 171 meta)
-  (import (scheme base) (srfi 9))
+(define-library (srfi meta)
+  (import (scheme base)
+  	  (std srfi 9)
+	  (std srfi 1))
   (export reduced reduced?
           unreduce
           ensure-reduced
@@ -21,8 +23,9 @@
           vector-reduce
           string-reduce
           bytevector-u8-reduce
-          port-reduce)
+          port-reduce
+	  (rename fold fold-left))
 
-  (include "../srfi-171-meta.scm"))
+  (include "srfi-171-meta.scm"))
 
 

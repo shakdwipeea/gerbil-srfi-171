@@ -1,3 +1,19 @@
+(import (scheme base)
+	(scheme read)
+	(scheme charset)
+	(scheme list)
+	(std srfi 13)
+	(srfi 64)
+	(srfi 171))
+
+(define (compose . functions)
+  (define (make-chain thunk chain)
+    (lambda args
+      (call-with-values (lambda () (apply thunk args)) chain)))
+  (if (null? functions)
+      values
+      (fold make-chain (car functions) (cdr functions))))
+
 (define (add1 x) (+ x 1))
 
 
@@ -16,8 +32,8 @@
                                       (lambda (x) (if (even? x) (+ x 1) #f))) rcons numeric-list))
 
 (test-equal (string-transduce (tmap char->integer) rcons string) (list-transduce (tmap char->integer) rcons list-of-chars))
-(test-equal 6 (string-transduce (tfilter char-alphabetic?) rcount string))
-(test-equal (list-transduce (tremove char-alphabetic?) rcount list-of-chars) (string-transduce (tremove char-alphabetic?) rcount string))
+;; (test-equal 6 (string-transduce (tfilter char-alphabetic?) rcount string))
+;; (test-equal (list-transduce (tremove char-alphabetic?) rcount list-of-chars) (string-transduce (tremove char-alphabetic?) rcount string))
 (test-equal '(s c h e m e  r o c k s) (list-transduce (treplace replace-alist) rcons '(1 2 3 4 5 4 r o c k s) ))
 
 (test-equal 6 (list-transduce (ttake 4) + numeric-list))
