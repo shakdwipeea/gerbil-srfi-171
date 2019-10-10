@@ -10,7 +10,7 @@
 ;; The software is provided "as is", without any express or implied warranties.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-library (srfi meta)
+(define-library (srfi 171-meta)
   (import (scheme base)
   	  (std srfi 9)
 	  (std srfi 1))

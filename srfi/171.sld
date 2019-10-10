@@ -19,7 +19,7 @@
 	  (std srfi 125)
 	  (only (std srfi 1) reverse!)
           (only (scheme vector) vector->list)
-          (srfi meta))
+          (srfi 171-meta))
   (cond-expand
    (gauche (import (only (gauche base) compose reverse!)))
    (chibi (import (only (srfi 1) reverse!))))
